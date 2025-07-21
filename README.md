@@ -10,8 +10,10 @@
 
 +=+=+=+=+= Express js +=+=+=+=+=
 1. Create the main Express entry point. (app.js)
-2. 
-
+2. Create API routes and data structure
+3. Set up basic data (JSON files or database)
+4. Test API endpoints
+5. Build frontend to consume the API
 
 
 

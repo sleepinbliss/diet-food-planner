@@ -3,6 +3,9 @@ const express = require('express');
 const cors = require('cors');
 // Imports Cross-Origin Resource Sharing middleware to handle requests from different domains (like the React frontend)
 
+const foodRoutes = require('./routes/foodRoutes');
+// Import foodRoutes file from the /routes/ directory.
+
 const app = express();
 // Creates an Express application instance that i'll use to define routes and middleware.
 const PORT = process.env.PORT || 5000;
@@ -18,6 +21,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // URL encoded Parser: Handles form data submissions.
 // extended: true allows parsing of nested objects in form data.
+
+app.use('/api', foodRoutes);
+// This means all routes in foodRoutes will be prefixed with /api
 
 // Basic route
 app.get('/', (req, res) => {
