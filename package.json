@@ -1,0 +1,34 @@
+{
+  "name": "diet-food-planner",
+  "version": "1.0.0",
+  "description": "A full-stack diet and food planning application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install:all": "npm install && cd frontend && npm install",
+    "dev:backend": "nodemon backend/index.js",
+    "dev:frontend": "cd frontend && npm start"
+  },
+  "keywords": ["diet", "food-planner", "nutrition", "health"],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sleepinbliss/diet-food-planner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sleepinbliss/diet-food-planner/issues"
+  },
+  "homepage": "https://github.com/sleepinbliss/diet-food-planner#readme",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.1.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
