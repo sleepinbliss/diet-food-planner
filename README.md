@@ -1,3 +1,24 @@
+==============CURRENT FOCUS==============
+1. Setup basic Express.js backend
+2. Create a basic skeleton/foundation for the website.
+3. Style website.
+4. Create json object array of food items. (Possibly with MongoDB);
+
+
+==============STEP BY STEP PROCESS==============
+
+
++=+=+=+=+= Express js +=+=+=+=+=
+1. Create the main Express entry point. (app.js)
+2. 
+
+
+
+
+
+==============INFORMATION==============
+
+
 This project is formatted in this way because:
 
 Modularity:
