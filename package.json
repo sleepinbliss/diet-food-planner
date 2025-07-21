@@ -6,33 +6,17 @@
   "scripts": {
     "start": "node src/backend/app.js",
     "dev": "nodemon src/backend/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "install:all": "npm install && cd frontend && npm install",
-    "dev:backend": "nodemon src/backend/app.js",
-    "dev:frontend": "cd frontend && npm start"
+    "dev:frontend": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test"
   },
-  "keywords": [
-    "diet",
-    "food-planner",
-    "nutrition",
-    "health"
-  ],
-  "author": "Your Name",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sleepinbliss/diet-food-planner.git"
-  },
-  "bugs": {
-    "url": "https://github.com/sleepinbliss/diet-food-planner/issues"
-  },
-  "homepage": "https://github.com/sleepinbliss/diet-food-planner#readme",
-  "type": "commonjs",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.7.0",
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

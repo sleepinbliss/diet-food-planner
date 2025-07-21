@@ -15,7 +15,13 @@
 4. Test API endpoints
 5. Build frontend to consume the API
 
-
++=+=+=+=+= REACT +=+=+=+=+=
+1. Set up frontend structure
+2. Create Frontend
+3. Install Frontend Dependencies
+4. Create API Service
+5. Create Basic React Components
+6. Create Main App Component
 
 
 ==============INFORMATION==============
