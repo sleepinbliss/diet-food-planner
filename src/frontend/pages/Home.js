@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import useData from '.../hooks/useData';
+import React, { useState } from 'react';
+import useData from '../hooks/useData'; // ✅ Correct relative path
 
 const Home = () => {
     const { data: foods, loading, error } = useData('http://localhost:5000/api/foods');
@@ -9,10 +9,10 @@ const Home = () => {
 
     return (
         <div className="home-page">
-            <h1>Diet Food Planner</h1>
-            <p>Your complete nutrition database</p>
+            {/* <h1>Diet Food Planner</h1>
+            <p>Your complete nutrition database</p> */}
 
-            <div className="food-grid">
+            {/* <div className="food-grid">
                 {foods?.data?.map(food => (
                     <div key={food.id} className="food-card">
                         <h3>{food.name}</h3>
@@ -24,7 +24,9 @@ const Home = () => {
                         </div>
                     </div>
                 ))}
-            </div>
+            </div> */}
         </div>
     );
 }
+
+export default Home;
