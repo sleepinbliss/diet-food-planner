@@ -1,30 +1,106 @@
 import React, { useState } from 'react';
-import useData from '../hooks/useData'; // ✅ Correct relative path
+import { useNavigate } from 'react-router-dom';
+import { GiFruitTree } from 'react-icons/gi';
+import useData from '../hooks/useData';
 
 const Home = () => {
+    const navigate = useNavigate();
     const { data: foods, loading, error } = useData('http://localhost:5000/api/foods');
 
     if (loading) return <div>Loading foods...</div>;
     if (error) return <div>Error: {error}</div>;
 
+    const handlePlannerClick = (plannerType) => {
+        navigate(`/${plannerType}`);
+    };
+
     return (
         <div className="home-page">
-            {/* <h1>Diet Food Planner</h1>
-            <p>Your complete nutrition database</p> */}
+            {/* Hero Landing Section */}
+            <section className="landing-hero">
+                <div className="landing-content">
+                    <GiFruitTree className="hero-tree-icon" size={120} color="white" />
+                    <p className="landing-subtitle">
+                        Discover the power of organized planning across every aspect of your life.
+                        From nutrition and productivity to learning and mental wellness - take control of your future.
+                    </p>
+                    <button className="primary-cta" onClick={() => document.getElementById('planners-section').scrollIntoView({ behavior: 'smooth' })}>
+                        Start Here
+                    </button>
+                </div>
+            </section>
 
-            {/* <div className="food-grid">
-                {foods?.data?.map(food => (
-                    <div key={food.id} className="food-card">
-                        <h3>{food.name}</h3>
-                        <p><strong>Category:</strong> {food.category}</p>
-                        <p><strong>Calories:</strong> {food.calories}</p>
-                        <p><strong>Protein:</strong> {food.protein}g</p>
-                        <div className="serving-size">
-                            <small>{food.servingSize}</small>
+            {/* Benefits Section */}
+            <section className="benefits-section">
+                <div className="benefits-container">
+                    <h2>Why Planning Matters</h2>
+                    <div className="benefits-grid">
+                        <div className="benefit-card">
+                            <div className="benefit-icon">🎯</div>
+                            <h3>Clarity & Focus</h3>
+                            <p>Transform overwhelming goals into actionable steps. Clear planning eliminates confusion and provides direction for every decision.</p>
+                        </div>
+                        <div className="benefit-card">
+                            <div className="benefit-icon">⚡</div>
+                            <h3>Increased Efficiency</h3>
+                            <p>Streamline your daily activities and eliminate time waste. Strategic planning can increase your productivity by up to 40%.</p>
+                        </div>
+                        <div className="benefit-card">
+                            <div className="benefit-icon">📈</div>
+                            <h3>Measurable Progress</h3>
+                            <p>Track your achievements and celebrate milestones. Visual progress tracking keeps you motivated and accountable.</p>
+                        </div>
+                        <div className="benefit-card">
+                            <div className="benefit-icon">🧘</div>
+                            <h3>Reduced Stress</h3>
+                            <p>Eliminate the anxiety of uncertainty. When you have a plan, you can focus on execution rather than worry about what's next.</p>
                         </div>
                     </div>
-                ))}
-            </div> */}
+                </div>
+            </section>
+
+            {/* Planners Section */}
+            <section id="planners-section" className="planners-section">
+                <h2 id="plannerTitle">Choose Your Planning Path</h2>
+                <div className="plannerOptions">
+                    <section className="hero meal-planner" onClick={() => handlePlannerClick('meal')}>
+                        <div className="hero-content">
+                            <h1>Meal Planning</h1>
+                            <div className="hero-description">
+                                <p>Plan your daily meals, track nutrition, and discover healthy recipes tailored to your dietary goals.</p>
+                            </div>
+                            <button className="cta-button" id="mealButton">Start Planning</button>
+                        </div>
+                    </section>
+                    <section className="hero productivity-planner" onClick={() => handlePlannerClick('productivity')}>
+                        <div className="hero-content">
+                            <h1>Productivity</h1>
+                            <div className="hero-description">
+                                <p>Organize tasks, set goals, and boost your efficiency with smart scheduling and progress tracking.</p>
+                            </div>
+                            <button className="cta-button" id="productButton">Start Planning</button>
+                        </div>
+                    </section>
+                    <section className="hero study-planner" onClick={() => handlePlannerClick('study')}>
+                        <div className="hero-content">
+                            <h1>Study</h1>
+                            <div className="hero-description">
+                                <p>Create study schedules, track learning progress, and optimize your study sessions for better results.</p>
+                            </div>
+                            <button className="cta-button" id="studyButton">Start Planning</button>
+                        </div>
+                    </section>
+                    <section className="hero mental-planner" onClick={() => handlePlannerClick('mental')}>
+                        <div className="hero-content">
+                            <h1>Mental Wellness</h1>
+                            <div className="hero-description">
+                                <p>Track your daily emotions, thoughts, and mental wellness with guided reflection and mood analysis.</p>
+                            </div>
+                            <button className="cta-button" id="mentalButton">Start Planning</button>
+                        </div>
+                    </section>
+                </div>
+            </section>
         </div>
     );
 }
