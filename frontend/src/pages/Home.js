@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GiFruitTree } from 'react-icons/gi';
 import useData from '../hooks/useData';
@@ -21,8 +21,6 @@ const Home = () => {
                 <div className="landing-content">
                     <GiFruitTree className="hero-tree-icon" size={120} color="white" />
                     <p className="landing-subtitle">
-                        Discover the power of organized planning across every aspect of your life.
-                        From nutrition and productivity to learning and mental wellness - take control of your future.
                     </p>
                     <button className="primary-cta" onClick={() => document.getElementById('planners-section').scrollIntoView({ behavior: 'smooth' })}>
                         Start Here
