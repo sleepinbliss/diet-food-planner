@@ -79,8 +79,8 @@ const MealPlanner = () => {
     return (
         <div className="planner-page meal-planner-page">
             <div className="planner-header">
-                <h1>Meal Planner</h1>
-                <p>Create a balanced meal by selecting one item from each macronutrient category.</p>
+                {/* <h1>Meal Planner</h1> */}
+                <p>Create a balanced meal by selecting items from the macronutrient categories.</p>
                 <div className="meal-actions">
                     <button
                         className="action-btn new-meal-btn"

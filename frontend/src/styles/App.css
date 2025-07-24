@@ -923,7 +923,7 @@ h1 {
 
 .planner-header {
 	text-align: center;
-	margin-bottom: 3rem;
+	margin-bottom: 1rem;
 }
 
 .planner-header h1 {
@@ -953,7 +953,7 @@ h1 {
 .meal-planner-page .planner-content {
 	display: flex;
 	flex-direction: column;
-	gap: 3rem;
+	gap: 1rem;
 }
 
 .category-cards {
