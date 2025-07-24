@@ -52,10 +52,6 @@ app.listen(PORT, '0.0.0.0', () => {
     console.log(`Local: http://localhost:${PORT}`);
     console.log(`On Your Network: http://[YOUR_IP]:${PORT}`);
 });
-// Starts the server on the specified port.
-// Callback functions: Runs when server successfully starts.
-//  Console message: Confirms the server is running and shows which port.
-
 
 // What this creates:
 /* 

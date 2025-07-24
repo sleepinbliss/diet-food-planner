@@ -10,6 +10,7 @@ const MealPlanner = () => {
     });
     const [currentMealName, setCurrentMealName] = useState('');
     const [showSavedMeals, setShowSavedMeals] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState('protein');
 
     // Extract the foods array from the API response
     const foods = apiResponse?.data || [];
@@ -76,11 +77,14 @@ const MealPlanner = () => {
         setCurrentMealName('');
     };
 
+    // Helper to format numbers to max 3 decimal places
+    const formatNum = (num) => Number(num).toFixed(3).replace(/\.?0+$/, '');
+
     return (
         <div className="planner-page meal-planner-page">
             <div className="planner-header">
                 {/* <h1>Meal Planner</h1> */}
-                <p>Create a balanced meal by selecting items from the macronutrient categories.</p>
+                {/* <p>Create a balanced meal by selecting items from the macronutrient categories.</p> */}
                 <div className="meal-actions">
                     <button
                         className="action-btn new-meal-btn"
@@ -92,7 +96,7 @@ const MealPlanner = () => {
                         className="action-btn saved-meals-btn"
                         onClick={() => setShowSavedMeals(!showSavedMeals)}
                     >
-                        My Saved Meals ({savedMeals.length})
+                        Saved Meals ({savedMeals.length})
                     </button>
                 </div>
             </div>
@@ -159,10 +163,10 @@ const MealPlanner = () => {
 
                 {/* Selected Foods Summary - Moved above category cards */}
                 <div className="selected-foods-summary">
-                    <h2>Your Balanced Meal</h2>
+                    {/* <h2>Your Balanced Meal</h2> */}
                     {selectedFoods.length === 0 ? (
                         <div className="empty-state">
-                            <p>Select one item from each category to create a balanced meal!</p>
+                            <p>Select an item...</p>
                         </div>
                     ) : (
                         <div className="meal-breakdown">
@@ -207,138 +211,165 @@ const MealPlanner = () => {
                                 <div className="nutrition-grid">
                                     <div className="nutrition-item">
                                         <span className="label">Calories</span>
-                                        <span className="value">{selectedFoods.reduce((sum, food) => sum + food.calories, 0)}</span>
+                                        <span className="value">{formatNum(selectedFoods.reduce((sum, food) => sum + food.calories, 0))}</span>
                                     </div>
                                     <div className="nutrition-item">
                                         <span className="label">Protein</span>
-                                        <span className="value">{selectedFoods.reduce((sum, food) => sum + food.protein, 0)}g</span>
+                                        <span className="value">{formatNum(selectedFoods.reduce((sum, food) => sum + food.protein, 0))}g</span>
                                     </div>
                                     <div className="nutrition-item">
                                         <span className="label">Carbs</span>
-                                        <span className="value">{selectedFoods.reduce((sum, food) => sum + food.carbs, 0)}g</span>
+                                        <span className="value">{formatNum(selectedFoods.reduce((sum, food) => sum + food.carbs, 0))}g</span>
                                     </div>
                                     <div className="nutrition-item">
                                         <span className="label">Fat</span>
-                                        <span className="value">{selectedFoods.reduce((sum, food) => sum + food.fat, 0)}g</span>
+                                        <span className="value">{formatNum(selectedFoods.reduce((sum, food) => sum + food.fat, 0))}g</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     )}
                 </div>
+                <div className="select-category-buttons">
+                    <button
+                        className={`category-btn${selectedCategory === 'protein' ? ' active' : ''}`}
+                        onClick={() => setSelectedCategory('protein')}
+                    >
+                        Protein
+                    </button>
+                    <button
+                        className={`category-btn${selectedCategory === 'carbs' ? ' active' : ''}`}
+                        onClick={() => setSelectedCategory('carbs')}
+                    >
+                        Carbs
+                    </button>
+                    <button
+                        className={`category-btn${selectedCategory === 'fats' ? ' active' : ''}`}
+                        onClick={() => setSelectedCategory('fats')}
+                    >
+                        Fats
+                    </button>
+                    <button
+                        className={`category-btn${selectedCategory === 'fruits' ? ' active' : ''}`}
+                        onClick={() => setSelectedCategory('fruits')}
+                    >
+                        Fruits
+                    </button>
+                </div>
 
                 <div className="category-cards">
-                    {/* Protein Category */}
-                    <div className="category-card protein-card">
-                        <div className="category-header">
-                            <h2>🥩 Protein</h2>
-                            <p>{proteinFoods.length} options</p>
-                        </div>
-                        <div className="food-list">
-                            {proteinFoods.map((food) => (
-                                <div key={food.id} className="food-item">
-                                    <div className="food-image">
-                                        <img src={food.image} alt={food.name} />
+                    {selectedCategory === 'protein' && (
+                        <div className="category-card protein-card">
+                            <div className="category-header">
+                                <h2>🥩 Protein</h2>
+                                <p>{proteinFoods.length} options</p>
+                            </div>
+                            <div className="food-list">
+                                {proteinFoods.map((food) => (
+                                    <div key={food.id} className="food-item">
+                                        <div className="food-image">
+                                            <img src={food.image} alt={food.name} />
+                                        </div>
+                                        <div className="food-info">
+                                            <h3>{food.name}</h3>
+                                            <p>{food.calories} cal | {food.protein}g protein</p>
+                                            <span className="serving-size">{food.servingSize}</span>
+                                        </div>
+                                        <button
+                                            className="add-btn"
+                                            onClick={() => addFood(food)}
+                                        >
+                                            Add
+                                        </button>
                                     </div>
-                                    <div className="food-info">
-                                        <h3>{food.name}</h3>
-                                        <p>{food.calories} cal | {food.protein}g protein</p>
-                                        <span className="serving-size">{food.servingSize}</span>
-                                    </div>
-                                    <button
-                                        className="add-btn"
-                                        onClick={() => addFood(food)}
-                                    >
-                                        Add
-                                    </button>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
-
-                    {/* Carbs Category */}
-                    <div className="category-card carbs-card">
-                        <div className="category-header">
-                            <h2>🍞 Carbs</h2>
-                            <p>{carbFoods.length} options</p>
-                        </div>
-                        <div className="food-list">
-                            {carbFoods.map((food) => (
-                                <div key={food.id} className="food-item">
-                                    <div className="food-image">
-                                        <img src={food.image} alt={food.name} />
+                    )}
+                    {selectedCategory === 'carbs' && (
+                        <div className="category-card carbs-card">
+                            <div className="category-header">
+                                <h2>🍞 Carbs</h2>
+                                <p>{carbFoods.length} options</p>
+                            </div>
+                            <div className="food-list">
+                                {carbFoods.map((food) => (
+                                    <div key={food.id} className="food-item">
+                                        <div className="food-image">
+                                            <img src={food.image} alt={food.name} />
+                                        </div>
+                                        <div className="food-info">
+                                            <h3>{food.name}</h3>
+                                            <p>{food.calories} cal | {food.carbs}g carbs</p>
+                                            <span className="serving-size">{food.servingSize}</span>
+                                        </div>
+                                        <button
+                                            className="add-btn"
+                                            onClick={() => addFood(food)}
+                                        >
+                                            Add
+                                        </button>
                                     </div>
-                                    <div className="food-info">
-                                        <h3>{food.name}</h3>
-                                        <p>{food.calories} cal | {food.carbs}g carbs</p>
-                                        <span className="serving-size">{food.servingSize}</span>
-                                    </div>
-                                    <button
-                                        className="add-btn"
-                                        onClick={() => addFood(food)}
-                                    >
-                                        Add
-                                    </button>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
-
-                    {/* Fats Category */}
-                    <div className="category-card fats-card">
-                        <div className="category-header">
-                            <h2>🥑 Fats</h2>
-                            <p>{fatFoods.length} options</p>
-                        </div>
-                        <div className="food-list">
-                            {fatFoods.map((food) => (
-                                <div key={food.id} className="food-item">
-                                    <div className="food-image">
-                                        <img src={food.image} alt={food.name} />
+                    )}
+                    {selectedCategory === 'fats' && (
+                        <div className="category-card fats-card">
+                            <div className="category-header">
+                                <h2>🥑 Fats</h2>
+                                <p>{fatFoods.length} options</p>
+                            </div>
+                            <div className="food-list">
+                                {fatFoods.map((food) => (
+                                    <div key={food.id} className="food-item">
+                                        <div className="food-image">
+                                            <img src={food.image} alt={food.name} />
+                                        </div>
+                                        <div className="food-info">
+                                            <h3>{food.name}</h3>
+                                            <p>{food.calories} cal | {food.fat}g fat</p>
+                                            <span className="serving-size">{food.servingSize}</span>
+                                        </div>
+                                        <button
+                                            className="add-btn"
+                                            onClick={() => addFood(food)}
+                                        >
+                                            Add
+                                        </button>
                                     </div>
-                                    <div className="food-info">
-                                        <h3>{food.name}</h3>
-                                        <p>{food.calories} cal | {food.fat}g fat</p>
-                                        <span className="serving-size">{food.servingSize}</span>
-                                    </div>
-                                    <button
-                                        className="add-btn"
-                                        onClick={() => addFood(food)}
-                                    >
-                                        Add
-                                    </button>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
-
-                    {/* Fruits Category */}
-                    <div className="category-card fruits-card">
-                        <div className="category-header">
-                            <h2>🍎 Fruits</h2>
-                            <p>{fruitFoods.length} options</p>
-                        </div>
-                        <div className="food-list">
-                            {fruitFoods.map((food) => (
-                                <div key={food.id} className="food-item">
-                                    <div className="food-image">
-                                        <img src={food.image} alt={food.name} />
+                    )}
+                    {selectedCategory === 'fruits' && (
+                        <div className="category-card fruits-card">
+                            <div className="category-header">
+                                <h2>🍎 Fruits</h2>
+                                <p>{fruitFoods.length} options</p>
+                            </div>
+                            <div className="food-list">
+                                {fruitFoods.map((food) => (
+                                    <div key={food.id} className="food-item">
+                                        <div className="food-image">
+                                            <img src={food.image} alt={food.name} />
+                                        </div>
+                                        <div className="food-info">
+                                            <h3>{food.name}</h3>
+                                            <p>{food.calories} cal | {food.carbs}g carbs</p>
+                                            <span className="serving-size">{food.servingSize}</span>
+                                        </div>
+                                        <button
+                                            className="add-btn"
+                                            onClick={() => addFood(food)}
+                                        >
+                                            Add
+                                        </button>
                                     </div>
-                                    <div className="food-info">
-                                        <h3>{food.name}</h3>
-                                        <p>{food.calories} cal | {food.carbs}g carbs</p>
-                                        <span className="serving-size">{food.servingSize}</span>
-                                    </div>
-                                    <button
-                                        className="add-btn"
-                                        onClick={() => addFood(food)}
-                                    >
-                                        Add
-                                    </button>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </div>

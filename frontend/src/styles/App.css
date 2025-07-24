@@ -109,7 +109,7 @@ nav,
 	padding: 0;
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
+	gap: 1rem;
 	padding: 0 1rem;
 }
 
@@ -117,7 +117,7 @@ nav,
 	width: 100%;
 	display: flex;
 	align-items: center;
-	padding: 1rem;
+	/* padding: 1rem; */
 	cursor: pointer;
 	border-radius: 8px;
 	transition: all 0.3s ease;
@@ -149,6 +149,13 @@ nav,
 	justify-content: center;
 }
 
+/* Make icons larger when sidebar is collapsed */
+.collapsed .nav-item .icon {
+	font-size: 2rem;
+	min-width: 32px;
+	transition: font-size 0.3s;
+}
+
 .nav-item .text {
 	transition: opacity 0.3s ease;
 	white-space: nowrap;
@@ -162,7 +169,8 @@ nav,
 
 .collapsed .nav-item {
 	justify-content: center;
-	padding: 1rem 0.5rem;
+	font-size: 2rem;
+	/* padding: 1rem 0.5rem; */
 }
 
 .collapsed .nav-item a {
@@ -917,7 +925,7 @@ h1 {
 .planner-page {
 	min-height: 100vh;
 	background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
-	padding: 2rem;
+	padding: 0.5rem;
 	color: var(--color01);
 }
 
@@ -947,13 +955,14 @@ h1 {
 	margin: 0 auto;
 	display: grid;
 	gap: 2rem;
+	width: 100%;
 }
 
 /* Meal Planner Specific */
 .meal-planner-page .planner-content {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: 2rem;
 }
 
 .category-cards {
@@ -1105,11 +1114,13 @@ h1 {
 }
 
 .selected-foods-summary {
-	background: linear-gradient(135deg, #2d2d2d 0%, #3a3a3a 100%);
 	border-radius: 16px;
-	padding: 2rem;
+	padding: 1rem;
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 	border: 1px solid rgba(255, 255, 255, 0.1);
+	border: 3px solid black;
+	width: 100%;
+	margin-bottom: 2rem;
 }
 
 .selected-foods-summary h2 {
@@ -1121,13 +1132,17 @@ h1 {
 .meal-breakdown {
 	display: flex;
 	flex-direction: column;
-	gap: 2rem;
+	gap: 1rem;
 }
 
 .selected-foods {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	gap: 1rem;
+	max-height: 500px;
+	overflow-y: scroll;
+	background-color: rgb(26, 26, 26);
+	padding: 1rem;
 }
 
 .selected-food-item {
@@ -1258,7 +1273,7 @@ h1 {
 	}
 
 	.category-card {
-		max-height: 400px;
+		max-height: 700px;
 	}
 
 	.selected-foods {
@@ -1395,7 +1410,6 @@ h1 {
 	background: linear-gradient(135deg, var(--color05) 0%, var(--color04) 100%);
 	padding: 1.5rem;
 	border-radius: 12px;
-	margin-top: 2rem;
 	border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -1624,11 +1638,48 @@ h1 {
 	font-size: 1.1rem;
 	color: var(--color01);
 }
+/* Category selection buttons for MealPlanner */
+.select-category-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+}
+.category-btn {
+	background: rgba(255, 255, 255, 0.12);
+	color: var(--color01);
+	border: 1px solid rgba(88, 88, 88, 0.18);
+	backdrop-filter: blur(8px);
+	padding: 0.8rem 2rem;
+	border-radius: 8px;
+	font-size: 1rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 8px rgba(88, 129, 87, 0.1);
+	letter-spacing: 0.5px;
+	outline: none;
+	width: 20%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.category-btn.active {
+	background: linear-gradient(135deg, var(--color03) 0%, var(--color04) 100%);
+	color: #fff;
+	box-shadow: 0 4px 16px rgba(88, 129, 87, 0.25);
+	transform: translateY(-2px) scale(1.05);
+}
+.category-btn:hover:not(.active) {
+	background: linear-gradient(135deg, var(--color02) 0%, var(--color04) 100%);
+	color: #fff;
+	transform: scale(1.04);
+}
 
 /* Meal Management Styles */
 .meal-actions {
 	display: flex;
-	gap: 1rem;
+	gap: 0.7rem;
 	margin-top: 1rem;
 	justify-content: center;
 	flex-wrap: wrap;
@@ -1642,6 +1693,7 @@ h1 {
 	cursor: pointer;
 	transition: all 0.3s ease;
 	font-size: 0.9rem;
+	margin-top: 1rem;
 }
 
 .new-meal-btn {
@@ -1655,12 +1707,12 @@ h1 {
 }
 
 .saved-meals-btn {
-	background: linear-gradient(135deg, #007bff, #6f42c1);
+	background: linear-gradient(135deg, #28a745, #20c997);
 	color: white;
 }
 
 .saved-meals-btn:hover {
-	background: linear-gradient(135deg, #0056b3, #5a2d91);
+	background: linear-gradient(135deg, #218838, #1ea085);
 	transform: translateY(-2px);
 }
 
@@ -1891,12 +1943,12 @@ h1 {
 /* Responsive Design for Meal Management */
 @media (max-width: 768px) {
 	.meal-actions {
-		flex-direction: column;
+		flex-direction: row;
 		align-items: center;
 	}
 
 	.action-btn {
-		width: 100%;
+		width: 48%;
 		max-width: 300px;
 	}
 
