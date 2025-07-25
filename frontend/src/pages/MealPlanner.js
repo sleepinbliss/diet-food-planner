@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useData from '../hooks/useData';
 
 const MealPlanner = () => {
-    const { data: apiResponse, loading, error } = useData('http://localhost:5000/api/foods');
+    const { data: apiResponse, loading, error } = useData('http://192.168.1.246:5000/api/foods');
     const [selectedFoods, setSelectedFoods] = useState([]);
     const [savedMeals, setSavedMeals] = useState(() => {
         const saved = localStorage.getItem('savedMeals');
@@ -85,7 +85,7 @@ const MealPlanner = () => {
             <div className="planner-header">
                 {/* <h1>Meal Planner</h1> */}
                 {/* <p>Create a balanced meal by selecting items from the macronutrient categories.</p> */}
-                <div className="meal-actions">
+                {/* <div className="meal-actions">
                     <button
                         className="action-btn new-meal-btn"
                         onClick={startNewMeal}
@@ -98,7 +98,7 @@ const MealPlanner = () => {
                     >
                         Saved Meals ({savedMeals.length})
                     </button>
-                </div>
+                </div> */}
             </div>
 
             <div className="planner-content">
@@ -191,11 +191,11 @@ const MealPlanner = () => {
                                     <div key={food.id} className="selected-food-item">
                                         <div className="food-image">
                                             <img src={food.image} alt={food.name} />
+                                            <span className={`category-badge ${food.category}`}>{food.category}</span>
                                         </div>
                                         <div className="food-details">
                                             <h4>{food.name}</h4>
                                             <p>{food.calories} cal | P: {food.protein}g | C: {food.carbs}g | F: {food.fat}g</p>
-                                            <span className={`category-badge ${food.category}`}>{food.category}</span>
                                         </div>
                                         <button
                                             className="remove-btn"

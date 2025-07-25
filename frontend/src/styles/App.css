@@ -39,7 +39,7 @@ nav,
 }
 
 .sidebar.collapsed {
-	width: 80px;
+	width: 100%;
 }
 
 .navHeader {
@@ -921,6 +921,54 @@ h1 {
 	}
 }
 
+/* Desktop sidebar styles remain unchanged */
+
+/* Mobile: Sidebar horizontal at bottom */
+@media (max-width: 768px) {
+	.sidebar {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100vw;
+		height: 64px;
+		min-height: unset;
+		max-height: 64px;
+		flex-direction: row;
+		border-right: none;
+		border-top: 1px solid rgba(0, 0, 0, 0.1);
+		box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+		padding: 0;
+		z-index: 100;
+	}
+
+	.nav-menu {
+		flex-direction: row;
+		justify-content: space-around;
+		align-items: center;
+		width: 100%;
+		padding: 0;
+		gap: 0;
+	}
+
+	.nav-item {
+		flex: 1;
+		justify-content: center;
+		align-items: center;
+		min-height: unset;
+	}
+
+	.nav-item .icon {
+		font-size: 1.5rem;
+	}
+
+	.navHeader,
+	.logo-section,
+	.main-logo,
+	.nav-item .text {
+		display: none;
+	}
+}
+
 /* Planner Pages Styling */
 .planner-page {
 	min-height: 100vh;
@@ -1062,8 +1110,13 @@ h1 {
 	width: 50px;
 	height: 50px;
 	border-radius: 8px;
-	overflow: hidden;
+	/* overflow: hidden; */
 	flex-shrink: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
 }
 
 .food-image img {
@@ -1141,8 +1194,9 @@ h1 {
 	gap: 1rem;
 	max-height: 500px;
 	overflow-y: scroll;
-	background-color: rgb(26, 26, 26);
+	background-color: rgba(26, 26, 26, 0.473);
 	padding: 1rem;
+	border-radius: 5px;
 }
 
 .selected-food-item {
@@ -1203,6 +1257,12 @@ h1 {
 	background: rgba(255, 159, 243, 0.2);
 	color: #ff9ff3;
 }
+.selected-food-item .food-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 8px;
+}
 
 .remove-btn {
 	background: #dc3545;
@@ -1230,6 +1290,7 @@ h1 {
 	padding: 1.5rem;
 	border-radius: 12px;
 	border: 1px solid rgba(255, 255, 255, 0.1);
+	margin-top: 1rem;
 }
 
 .meal-summary h3 {
@@ -1720,20 +1781,21 @@ h1 {
 .meal-name-section {
 	display: flex;
 	gap: 1rem;
-	margin-bottom: 1.5rem;
+
 	align-items: center;
 	flex-wrap: wrap;
 }
 
 .meal-name-input {
 	flex: 1;
-	min-width: 200px;
+	/* min-width: 100px; */
 	padding: 0.75rem;
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	border-radius: 8px;
 	background: rgba(255, 255, 255, 0.1);
 	color: var(--color01);
 	font-size: 1rem;
+	width: 100%;
 }
 
 .meal-name-input::placeholder {
@@ -1948,7 +2010,7 @@ h1 {
 	}
 
 	.action-btn {
-		width: 48%;
+		width: 100%;
 		max-width: 300px;
 	}
 

@@ -5,7 +5,7 @@ import useData from '../hooks/useData';
 
 const Home = () => {
     const navigate = useNavigate();
-    const { data: foods, loading, error } = useData('http://localhost:5000/api/foods');
+    const { data: foods, loading, error } = useData('http://192.168.1.246:5000/api/foods');
 
     if (loading) return <div>Loading foods...</div>;
     if (error) return <div>Error: {error}</div>;
